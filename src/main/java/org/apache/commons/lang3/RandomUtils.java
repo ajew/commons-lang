@@ -69,6 +69,8 @@ public class RandomUtils {
      * @return the random byte array
      * @throws IllegalArgumentException if {@code count} is negative
      */
+    //@ ensures \result.length == count;
+    //@ signals_only IllegalArgumentException;
     public static byte[] nextBytes(final int count) {
         Validate.isTrue(count >= 0, "Count cannot be negative.");
 
@@ -91,6 +93,8 @@ public class RandomUtils {
      *             {@code startInclusive} is negative
      * @return the random integer
      */
+    //@ ensures \result >= startInclusive && \result <= endExclusive;
+    //@ signals_only IllegalArgumentException;
     public static int nextInt(final int startInclusive, final int endExclusive) {
         Validate.isTrue(endExclusive >= startInclusive,
                 "Start value must be smaller or equal to end value.");
@@ -128,6 +132,8 @@ public class RandomUtils {
      *             {@code startInclusive} is negative
      * @return the random long
      */
+    //@ ensures \result >= startInclusive && \result <= endExclusive;
+    //@ signals_only IllegalArgumentException;
     public static long nextLong(final long startInclusive, final long endExclusive) {
         Validate.isTrue(endExclusive >= startInclusive,
                 "Start value must be smaller or equal to end value.");
@@ -165,6 +171,8 @@ public class RandomUtils {
      *             {@code startInclusive} is negative
      * @return the random double
      */
+    //@ ensures \result >= startInclusive && \result <= endExclusive;
+    //@ signals_only IllegalArgumentException;
     public static double nextDouble(final double startInclusive, final double endInclusive) {
         Validate.isTrue(endInclusive >= startInclusive,
                 "Start value must be smaller or equal to end value.");
@@ -202,6 +210,8 @@ public class RandomUtils {
      *             {@code startInclusive} is negative
      * @return the random float
      */
+    //@ ensures \result >= startInclusive && \result <= endExclusive;
+    //@ signals_only IllegalArgumentException;
     public static float nextFloat(final float startInclusive, final float endInclusive) {
         Validate.isTrue(endInclusive >= startInclusive,
                 "Start value must be smaller or equal to end value.");

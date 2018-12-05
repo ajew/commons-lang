@@ -163,6 +163,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if either date is <code>null</code>
      * @since 2.1
      */
+    //@ requires date1 != null && date2 != null;
+    //@ signals_only IllegalArgumentException;
     public static boolean isSameDay(final Date date1, final Date date2) {
         if (date1 == null || date2 == null) {
             throw new IllegalArgumentException("The date must not be null");
@@ -187,6 +189,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if either calendar is <code>null</code>
      * @since 2.1
      */
+    //@ requires cal1 != null && cal2 != null;
+    //@ signals_only IllegalArgumentException;
     public static boolean isSameDay(final Calendar cal1, final Calendar cal2) {
         if (cal1 == null || cal2 == null) {
             throw new IllegalArgumentException("The date must not be null");
