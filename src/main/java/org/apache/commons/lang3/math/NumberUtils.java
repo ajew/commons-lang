@@ -100,6 +100,9 @@ public class NumberUtils {
      *  conversion fails
      * @since 2.1
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(int);
+    //@ ensures \result == 0 || \result == Integer.parseInt(str);
     public static int toInt(final String str) {
         return toInt(str, 0);
     }
@@ -121,6 +124,11 @@ public class NumberUtils {
      * @return the int represented by the string, or the default if conversion fails
      * @since 2.1
      */
+
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(int);
+    //@ ensures \result == defaultValue || \result == Integer.parseInt(str);
+    //@ signals_only NumberFormatException;
     public static int toInt(final String str, final int defaultValue) {
         if (str == null) {
             return defaultValue;
@@ -149,6 +157,9 @@ public class NumberUtils {
      *  conversion fails
      * @since 2.1
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(long);
+    //@ ensures \result == 0L || \result == Long.parseLong(str);
     public static long toLong(final String str) {
         return toLong(str, 0L);
     }
@@ -170,6 +181,11 @@ public class NumberUtils {
      * @return the long represented by the string, or the default if conversion fails
      * @since 2.1
      */
+
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(long);
+    //@ ensures \result == defaultValue || \result == Long.parseLong(str);
+    //@ signals_only NumberFormatException;
     public static long toLong(final String str, final long defaultValue) {
         if (str == null) {
             return defaultValue;
@@ -199,6 +215,10 @@ public class NumberUtils {
      *  if conversion fails
      * @since 2.1
      */
+
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(float);
+    //@ ensures \result == 0.0f || \result == Float.parseFloat(str);
     public static float toFloat(final String str) {
         return toFloat(str, 0.0f);
     }
@@ -222,6 +242,11 @@ public class NumberUtils {
      *  if conversion fails
      * @since 2.1
      */
+
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(float);
+    //@ ensures \result == defaultValue || \result == Float.parseFloat(str);
+    //@ signals_only NumberFormatException;
     public static float toFloat(final String str, final float defaultValue) {
       if (str == null) {
           return defaultValue;
@@ -251,6 +276,10 @@ public class NumberUtils {
      *  if conversion fails
      * @since 2.1
      */
+
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(double);
+    //@ ensures \result == 0.0d || \result == Double.parseDouble(str);
     public static double toDouble(final String str) {
         return toDouble(str, 0.0d);
     }
@@ -274,6 +303,10 @@ public class NumberUtils {
      *  if conversion fails
      * @since 2.1
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(double);
+    //@ ensures \result == defaultValue || \result == Double.parseDouble(str);
+    //@ signals_only NumberFormatException;
     public static double toDouble(final String str, final double defaultValue) {
       if (str == null) {
           return defaultValue;
@@ -301,6 +334,9 @@ public class NumberUtils {
      *  <code>0.0d</code> if the <code>BigDecimal</code> is <code>null</code>.
      * @since 3.8
      */
+    //@ requires \typeof(value) == \type(BigDecimal);
+    //@ ensures \typeof(\result) == \type(double);
+    //@ ensures \result == 0.0d || \result == value.doubleValue();
     public static double toDouble(final BigDecimal value) {
         return toDouble(value, 0.0d);
     }
@@ -322,6 +358,10 @@ public class NumberUtils {
      *  defaultValue if the <code>BigDecimal</code> is <code>null</code>.
      * @since 3.8
      */
+    //@ requires \typeof(value) == \type(BigDecimal);
+    //@ requires \typeof(defaultValue) == \type(double);
+    //@ ensures \typeof(\result) == \type(double);
+    //@ ensures \result == defaultValue || \result == value.doubleValue();
     public static double toDouble(final BigDecimal value, final double defaultValue) {
         return value == null ? defaultValue : value.doubleValue();
     }
@@ -344,6 +384,9 @@ public class NumberUtils {
      *  conversion fails
      * @since 2.5
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(byte);
+    //@ ensures \result == (byte) 0 || \result == Byte.parseByte(str);
     public static byte toByte(final String str) {
         return toByte(str, (byte) 0);
     }
@@ -365,6 +408,9 @@ public class NumberUtils {
      * @return the byte represented by the string, or the default if conversion fails
      * @since 2.5
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(byte);
+    //@ ensures \result == defaultValue || \result == Byte.parseByte(str);
     public static byte toByte(final String str, final byte defaultValue) {
         if (str == null) {
             return defaultValue;
@@ -393,6 +439,9 @@ public class NumberUtils {
      *  conversion fails
      * @since 2.5
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(short);
+    //@ ensures \result == (short) 0 || \result == Short.parseShort(str);
     public static short toShort(final String str) {
         return toShort(str, (short) 0);
     }
@@ -414,6 +463,9 @@ public class NumberUtils {
      * @return the short represented by the string, or the default if conversion fails
      * @since 2.5
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(short);
+    //@ ensures \result == defaultValue || \result == Short.parseShort(str);
     public static short toShort(final String str, final short defaultValue) {
         if (str == null) {
             return defaultValue;
@@ -837,6 +889,9 @@ public class NumberUtils {
      * @param stopPos the position of the exponent or decimal point
      * @return mantissa of the given number
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ requires str.matches("^[+-]?[0-9]\\d*(\\.\\d+)?$");
+    //@ ensures \result.matches("^[+-]?[0-9]\\d*(\\.\\d+)?$");
     private static String getMantissa(final String str, final int stopPos) {
         final char firstChar = str.charAt(0);
         final boolean hasSign = firstChar == '-' || firstChar == '+';
@@ -874,6 +929,8 @@ public class NumberUtils {
      * @return converted <code>Float</code> (or null if the input is null)
      * @throws NumberFormatException if the value cannot be converted
      */
+    //@ signals_only NumberFormatException;
+    //@ ensures \typeof(\result) == \type(float) || \result == null;
     public static Float createFloat(final String str) {
         if (str == null) {
             return null;
@@ -890,6 +947,8 @@ public class NumberUtils {
      * @return converted <code>Double</code> (or null if the input is null)
      * @throws NumberFormatException if the value cannot be converted
      */
+	//@ signals_only NumberFormatException;
+    //@ ensures \typeof(\result) == \type(double) || \result == null;
     public static Double createDouble(final String str) {
         if (str == null) {
             return null;
@@ -908,6 +967,8 @@ public class NumberUtils {
      * @return converted <code>Integer</code> (or null if the input is null)
      * @throws NumberFormatException if the value cannot be converted
      */
+    //@ signals_only NumberFormatException;
+    //@ ensures \typeof(\result) == \type(Integer) || \result == null;
     public static Integer createInteger(final String str) {
         if (str == null) {
             return null;
@@ -927,6 +988,8 @@ public class NumberUtils {
      * @return converted <code>Long</code> (or null if the input is null)
      * @throws NumberFormatException if the value cannot be converted
      */
+    //@ signals_only NumberFormatException;
+    //@ ensures \typeof(\result) == \type(long) || \result == null;
     public static Long createLong(final String str) {
         if (str == null) {
             return null;
@@ -1008,6 +1071,13 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from min(long[]) to min(long...)
      */
+    //observar que a documentação diz que precisa não ser null ou não vazio, porém faz checagem logo após.
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result <= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(long);
     public static long min(final long... array) {
         // Validates input
         validateArray(array);
@@ -1032,6 +1102,13 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from min(int[]) to min(int...)
      */
+    
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result <= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(int);
     public static int min(final int... array) {
         // Validates input
         validateArray(array);
@@ -1056,6 +1133,13 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from min(short[]) to min(short...)
      */
+    
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result <= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(short);
     public static short min(final short... array) {
         // Validates input
         validateArray(array);
@@ -1080,6 +1164,12 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from min(byte[]) to min(byte...)
      */
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result <= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(byte);
     public static byte min(final byte... array) {
         // Validates input
         validateArray(array);
@@ -1105,6 +1195,7 @@ public class NumberUtils {
      * @see IEEE754rUtils#min(double[]) IEEE754rUtils for a version of this method that handles NaN differently
      * @since 3.4 Changed signature from min(double[]) to min(double...)
      */
+    	
     public static double min(final double... array) {
         // Validates input
         validateArray(array);
@@ -1162,6 +1253,12 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from max(long[]) to max(long...)
      */
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result >= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(long);
     public static long max(final long... array) {
         // Validates input
         validateArray(array);
@@ -1186,6 +1283,12 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from max(int[]) to max(int...)
      */
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result >= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(int);
     public static int max(final int... array) {
         // Validates input
         validateArray(array);
@@ -1210,6 +1313,12 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from max(short[]) to max(short...)
      */
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result >= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(short);
     public static short max(final short... array) {
         // Validates input
         validateArray(array);
@@ -1234,6 +1343,12 @@ public class NumberUtils {
      * @throws IllegalArgumentException if <code>array</code> is empty
      * @since 3.4 Changed signature from max(byte[]) to max(byte...)
      */
+    //@ requires array != null && array.length > 0;
+    //@ signals_only IllegalArgumentException;
+    /*@ ensures \forall int i; 0 <= i && i < array.length;
+    		\result >= array[i];
+    */
+    //@ ensures \typeof(\result) == \type(byte);
     public static byte max(final byte... array) {
         // Validates input
         validateArray(array);
@@ -1326,6 +1441,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the smallest of the values
      */
+    // ensures a <= b && a <= c;
     public static long min(long a, final long b, final long c) {
         if (b < a) {
             a = b;
@@ -1344,6 +1460,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the smallest of the values
      */
+    // ensures a <= b && a <= c;
     public static int min(int a, final int b, final int c) {
         if (b < a) {
             a = b;
@@ -1362,6 +1479,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the smallest of the values
      */
+    // ensures a <= b && a <= c;
     public static short min(short a, final short b, final short c) {
         if (b < a) {
             a = b;
@@ -1380,6 +1498,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the smallest of the values
      */
+    // ensures a <= b && a <= c;
     public static byte min(byte a, final byte b, final byte c) {
         if (b < a) {
             a = b;
@@ -1432,6 +1551,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the largest of the values
      */
+    // ensures a >= b && a >= c;
     public static long max(long a, final long b, final long c) {
         if (b > a) {
             a = b;
@@ -1450,6 +1570,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the largest of the values
      */
+    // ensures a >= b && a >= c;
     public static int max(int a, final int b, final int c) {
         if (b > a) {
             a = b;
@@ -1468,6 +1589,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the largest of the values
      */
+    // ensures a >= b && a >= c;
     public static short max(short a, final short b, final short c) {
         if (b > a) {
             a = b;
@@ -1486,6 +1608,7 @@ public class NumberUtils {
      * @param c  value 3
      * @return  the largest of the values
      */
+    // ensures a >= b && a >= c;
     public static byte max(byte a, final byte b, final byte c) {
         if (b > a) {
             a = b;
@@ -1768,6 +1891,7 @@ public class NumberUtils {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 3.4
      */
+    //@ ensures \result == 0 || \result == 1 || \result == -1;
     public static int compare(final int x, final int y) {
         if (x == y) {
             return 0;
@@ -1785,6 +1909,7 @@ public class NumberUtils {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 3.4
      */
+    //@ ensures \result == 0 || \result == 1 || \result == -1;
     public static int compare(final long x, final long y) {
         if (x == y) {
             return 0;
@@ -1802,6 +1927,7 @@ public class NumberUtils {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 3.4
      */
+  //@ ensures \result == 0 || \result == 1 || \result == -1;
     public static int compare(final short x, final short y) {
         if (x == y) {
             return 0;
@@ -1819,6 +1945,7 @@ public class NumberUtils {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 3.4
      */
+  //@ ensures \result == 0 || \result == 1 || \result == -1;
     public static int compare(final byte x, final byte y) {
         return x - y;
     }
