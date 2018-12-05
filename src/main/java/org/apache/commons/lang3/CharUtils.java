@@ -90,6 +90,8 @@ public class CharUtils {
      * @param ch  the character to convert
      * @return a Character of the specified character
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(Character);
     @Deprecated
     public static Character toCharacterObject(final char ch) {
         return Character.valueOf(ch);
@@ -112,6 +114,8 @@ public class CharUtils {
      * @param str  the character to convert
      * @return the Character value of the first letter of the String
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(Character);
     public static Character toCharacterObject(final String str) {
         if (StringUtils.isEmpty(str)) {
             return null;
@@ -133,6 +137,9 @@ public class CharUtils {
      * @return the char value of the Character
      * @throws IllegalArgumentException if the Character is null
      */
+    //@ requires \typeof(ch) == \type(Character);
+    //@ ensures \typeof(\result) == \type(char);
+    //@ signals_only IllegalArgumentException;
     public static char toChar(final Character ch) {
         Validate.isTrue(ch != null, "The Character must not be null");
         return ch.charValue();
@@ -151,6 +158,8 @@ public class CharUtils {
      * @param defaultValue  the value to use if the  Character is null
      * @return the char value of the Character or the default if null
      */
+    //@ requires \typeof(ch) == \type(Character) && \typeof(defaultValue) == \type(char);
+    //@ ensures \result == defaultValue || \result == ch.charValue();
     public static char toChar(final Character ch, final char defaultValue) {
         if (ch == null) {
             return defaultValue;
@@ -174,6 +183,9 @@ public class CharUtils {
      * @return the char value of the first letter of the String
      * @throws IllegalArgumentException if the String is empty
      */
+    //@ requires \typeof(str) == \type(String);
+    //@ ensures \typeof(\result) == \type(char);
+    //@ signals_only IllegalArgumentException;
     public static char toChar(final String str) {
         Validate.isTrue(StringUtils.isNotEmpty(str), "The String must not be empty");
         return str.charAt(0);
@@ -194,6 +206,8 @@ public class CharUtils {
      * @param defaultValue  the value to use if the  Character is null
      * @return the char value of the first letter of the String or the default if null
      */
+    //@ requires \typeof(ch) == \type(Character) && \typeof(defaultValue) == \type(char);
+    //@ ensures \result == defaultValue || \typeof(ch) == \type(char);
     public static char toChar(final String str, final char defaultValue) {
         if (StringUtils.isEmpty(str)) {
             return defaultValue;
@@ -217,6 +231,9 @@ public class CharUtils {
      * @return the int value of the character
      * @throws IllegalArgumentException if the character is not ASCII numeric
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(int);
+    //@ signals_only IllegalArgumentException;
     public static int toIntValue(final char ch) {
         if (!isAsciiNumeric(ch)) {
             throw new IllegalArgumentException("The character " + ch + " is not in the range '0' - '9'");
@@ -239,6 +256,8 @@ public class CharUtils {
      * @param defaultValue  the default value to use if the character is not numeric
      * @return the int value of the character
      */
+    //@ requires \typeof(ch) == \type(char) && \typeof(defaultValue) == \type(int);
+    //@ ensures \result == defaultValue || \typeof(\result) == \type(int);
     public static int toIntValue(final char ch, final int defaultValue) {
         if (!isAsciiNumeric(ch)) {
             return defaultValue;
@@ -262,6 +281,9 @@ public class CharUtils {
      * @return the int value of the character
      * @throws IllegalArgumentException if the Character is not ASCII numeric or is null
      */
+    //@ requires \typeof(ch) == \type(Character);
+    //@ ensures \typeof(\result) == \type(int);
+    //@ signals_only IllegalArgumentException;
     public static int toIntValue(final Character ch) {
         Validate.isTrue(ch != null, "The character must not be null");
         return toIntValue(ch.charValue());
@@ -283,6 +305,8 @@ public class CharUtils {
      * @param defaultValue  the default value to use if the character is not numeric
      * @return the int value of the character
      */
+    //@ requires \typeof(ch) == \type(Character) && \typeof(defaultValue) == \type(int);
+    //@ ensures \result == defaultValue || \typeof(\result) == \type(int);
     public static int toIntValue(final Character ch, final int defaultValue) {
         if (ch == null) {
             return defaultValue;
@@ -305,6 +329,8 @@ public class CharUtils {
      * @param ch  the character to convert
      * @return a String containing the one specified character
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(String);
     public static String toString(final char ch) {
         if (ch < 128) {
             return CHAR_STRING_ARRAY[ch];
@@ -329,6 +355,8 @@ public class CharUtils {
      * @param ch  the character to convert
      * @return a String containing the one specified character
      */
+    //@ requires \typeof(ch) == \type(Character);
+    //@ ensures \typeof(\result) == \type(String);
     public static String toString(final Character ch) {
         if (ch == null) {
             return null;
@@ -350,6 +378,8 @@ public class CharUtils {
      * @param ch  the character to convert
      * @return the escaped Unicode string
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(String);
     public static String unicodeEscaped(final char ch) {
         return "\\u" +
             HEX_DIGITS[(ch >> 12) & 15] +
@@ -374,6 +404,8 @@ public class CharUtils {
      * @param ch  the character to convert, may be null
      * @return the escaped Unicode string, null if null input
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(String) || \result == null;
     public static String unicodeEscaped(final Character ch) {
         if (ch == null) {
             return null;
@@ -397,6 +429,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if less than 128
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch < 128) || (\result == false && ch >= 128);
     public static boolean isAscii(final char ch) {
         return ch < 128;
     }
@@ -416,6 +450,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 32 and 126 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch < 127 && ch >= 32) || (\result == false && (ch >= 127 || ch < 32));
     public static boolean isAsciiPrintable(final char ch) {
         return ch >= 32 && ch < 127;
     }
@@ -435,6 +471,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if less than 32 or equals 127
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch == 127 || ch < 32) || (\result == false && (ch != 127 && ch >= 32));
     public static boolean isAsciiControl(final char ch) {
         return ch < 32 || ch == 127;
     }
@@ -454,6 +492,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 65 and 90 or 97 and 122 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(boolean);
     public static boolean isAsciiAlpha(final char ch) {
         return isAsciiAlphaUpper(ch) || isAsciiAlphaLower(ch);
     }
@@ -473,6 +513,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 65 and 90 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch >= 65 && ch <= 90) || (\result == false && (ch < 65 || ch > 90));
     public static boolean isAsciiAlphaUpper(final char ch) {
         return ch >= 'A' && ch <= 'Z';
     }
@@ -492,6 +534,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 97 and 122 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch >= 97 && ch <= 122) || (\result == false && (ch < 97 || ch > 122));
     public static boolean isAsciiAlphaLower(final char ch) {
         return ch >= 'a' && ch <= 'z';
     }
@@ -511,6 +555,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 48 and 57 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures (\result == true && ch >= 48 && ch <= 57) || (\result == false && (ch < 48 || ch > 57));
     public static boolean isAsciiNumeric(final char ch) {
         return ch >= '0' && ch <= '9';
     }
@@ -530,6 +576,8 @@ public class CharUtils {
      * @param ch  the character to check
      * @return true if between 48 and 57 or 65 and 90 or 97 and 122 inclusive
      */
+    //@ requires \typeof(ch) == \type(char);
+    //@ ensures \typeof(\result) == \type(boolean);
     public static boolean isAsciiAlphanumeric(final char ch) {
         return isAsciiAlpha(ch) || isAsciiNumeric(ch);
     }
@@ -544,6 +592,8 @@ public class CharUtils {
      *         a value greater than {@code 0} if {@code x > y}
      * @since 3.4
      */
+    //@ requires \typeof(x) == \type(char) && \typeof(y) == \type(char);
+    //@ ensures \typeof(\result) == \type(int);
     public static int compare(final char x, final char y) {
         return x-y;
     }
