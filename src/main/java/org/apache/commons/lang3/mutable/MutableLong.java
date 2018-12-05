@@ -43,7 +43,7 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
 	 */
 	public MutableLong() {
 		super();
-	}
+	} 
 
 	/**
 	 * Constructs a new MutableLong with the specified value.

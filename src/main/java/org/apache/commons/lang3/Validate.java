@@ -104,6 +104,8 @@ public class Validate {
      * @see #isTrue(boolean, String, double)
      * @see #isTrue(boolean, String, Object...)
      */
+    //@ requires \typeof(expression) == \type(boolean) || \typeof(message) == \type(String) || \typeof(value) == \type(long);
+    //@ signals_only IllegalArgumentException;
     public static void isTrue(final boolean expression, final String message, final long value) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(message, Long.valueOf(value)));
@@ -129,6 +131,8 @@ public class Validate {
      * @see #isTrue(boolean, String, long)
      * @see #isTrue(boolean, String, Object...)
      */
+  //@ requires \typeof(expression) == \type(boolean) || \typeof(message) == \type(String) || \typeof(value) == \type(double);
+    //@ signals_only IllegalArgumentException;
     public static void isTrue(final boolean expression, final String message, final double value) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(message, Double.valueOf(value)));
@@ -153,6 +157,8 @@ public class Validate {
      * @see #isTrue(boolean, String, long)
      * @see #isTrue(boolean, String, double)
      */
+    //@ requires \typeof(expression) == \type(boolean) || \typeof(message) == \type(String) || \typeof(values) == \type(Object...);
+    //@ signals_only IllegalArgumentException;
     public static void isTrue(final boolean expression, final String message, final Object... values) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(message, values));
@@ -178,6 +184,8 @@ public class Validate {
      * @see #isTrue(boolean, String, double)
      * @see #isTrue(boolean, String, Object...)
      */
+    //@ requires \typeof(expression) == \type(boolean);
+    //@ signals_only IllegalArgumentException;
     public static void isTrue(final boolean expression) {
         if (!expression) {
             throw new IllegalArgumentException(DEFAULT_IS_TRUE_EX_MESSAGE);
@@ -802,6 +810,8 @@ public class Validate {
      *
      * @since 3.0
      */
+    //@ requires \typeof(expression) == \type(boolean);
+    //@ signals_only IllegalArgumentException;
     public static void validState(final boolean expression) {
         if (!expression) {
             throw new IllegalStateException(DEFAULT_VALID_STATE_EX_MESSAGE);
@@ -824,6 +834,8 @@ public class Validate {
      *
      * @since 3.0
      */
+    //@ requires \typeof(expression) == \type(boolean) || \typeof(message) == \type(String) || \typeof(values) == \type(Object...);
+    //@ signals_only IllegalArgumentException;
     public static void validState(final boolean expression, final String message, final Object... values) {
         if (!expression) {
             throw new IllegalStateException(String.format(message, values));
@@ -848,6 +860,8 @@ public class Validate {
      *
      * @since 3.0
      */
+    //@ requires \typeof(input) == \type(CharSequence) && \typeof(pattern) == \type(String) && input != null && pattern != null;
+    //@ signals_only IllegalArgumentException;
     public static void matchesPattern(final CharSequence input, final String pattern) {
         // TODO when breaking BC, consider returning input
         if (!Pattern.matches(pattern, input)) {
@@ -872,6 +886,8 @@ public class Validate {
      *
      * @since 3.0
      */
+    //@ requires \typeof(input) == \type(CharSequence) && \typeof(pattern) == \type(String) && input != null && pattern != null && message != null;
+    //@ signals_only IllegalArgumentException;
     public static void matchesPattern(final CharSequence input, final String pattern, final String message, final Object... values) {
         // TODO when breaking BC, consider returning input
         if (!Pattern.matches(pattern, input)) {
@@ -897,6 +913,8 @@ public class Validate {
      *
      * @since 3.5
      */
+    //@ requires \typeof(value) == \type(double);
+    //@ signals_only IllegalArgumentException;
     public static void notNaN(final double value) {
         notNaN(value, DEFAULT_NOT_NAN_EX_MESSAGE);
     }
@@ -915,6 +933,8 @@ public class Validate {
      *
      * @since 3.5
      */
+    //@ requires \typeof(value) == \type(double) && \typeof(message) == \type(String) && message != null;
+    //@ signals_only IllegalArgumentException;
     public static void notNaN(final double value, final String message, final Object... values) {
         if (Double.isNaN(value)) {
             throw new IllegalArgumentException(String.format(message, values));
@@ -938,6 +958,8 @@ public class Validate {
      *
      * @since 3.5
      */
+    //@ requires \typeof(value) == \type(double);
+    //@ signals_only IllegalArgumentException;
     public static void finite(final double value) {
         finite(value, DEFAULT_FINITE_EX_MESSAGE, value);
     }
@@ -956,6 +978,8 @@ public class Validate {
      *
      * @since 3.5
      */
+    //@ requires \typeof(value) == \type(double) && \typeof(message) == \type(String) && message != null;
+    //@ signals_only IllegalArgumentException;
     public static void finite(final double value, final String message, final Object... values) {
         if (Double.isNaN(value) || Double.isInfinite(value)) {
             throw new IllegalArgumentException(String.format(message, values));
@@ -1162,7 +1186,9 @@ public class Validate {
     * @throws IllegalArgumentException if the value falls out of the boundaries
     *
     * @since 3.3
-    */
+    */ 
+    //@ requires \typeof(start) == \type(long) && \typeof(end) == \type(long) && \typeof(value) == \type(long);
+    //@ signals_only IllegalArgumentException;
     @SuppressWarnings("boxing")
     public static void exclusiveBetween(final long start, final long end, final long value) {
         // TODO when breaking BC, consider returning value
@@ -1187,6 +1213,8 @@ public class Validate {
     *
     * @since 3.3
     */
+    //@ requires \typeof(start) == \type(long) && \typeof(end) == \type(long) && \typeof(value) == \type(long) && start != null && end != null && message != null;
+    //@ signals_only IllegalArgumentException;
     public static void exclusiveBetween(final long start, final long end, final long value, final String message) {
         // TODO when breaking BC, consider returning value
         if (value <= start || value >= end) {
@@ -1207,6 +1235,8 @@ public class Validate {
     *
     * @since 3.3
     */
+    //@ requires \typeof(start) == \type(double) && \typeof(end) == \type(double) && \typeof(value) == \type(double);
+    //@ signals_only IllegalArgumentException;
     @SuppressWarnings("boxing")
     public static void exclusiveBetween(final double start, final double end, final double value) {
         // TODO when breaking BC, consider returning value
@@ -1231,6 +1261,8 @@ public class Validate {
     *
     * @since 3.3
     */
+    //@ requires \typeof(start) == \type(double) && \typeof(end) == \type(double) && \typeof(value) == \type(double) && message != null;
+    //@ signals_only IllegalArgumentException;
     public static void exclusiveBetween(final double start, final double end, final double value, final String message) {
         // TODO when breaking BC, consider returning value
         if (value <= start || value >= end) {
