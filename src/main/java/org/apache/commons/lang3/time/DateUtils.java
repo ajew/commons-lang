@@ -212,6 +212,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if either date is <code>null</code>
      * @since 2.1
      */
+    //@ requires date1 != null && date2 != null;
+    //@ signals_only IllegalArgumentException;
     public static boolean isSameInstant(final Date date1, final Date date2) {
         if (date1 == null || date2 == null) {
             throw new IllegalArgumentException("The date must not be null");
@@ -230,6 +232,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if either date is <code>null</code>
      * @since 2.1
      */
+    //@ requires cal1 != null && cal2 != null;
+    //@ signals_only IllegalArgumentException;
     public static boolean isSameInstant(final Calendar cal1, final Calendar cal2) {
         if (cal1 == null || cal2 == null) {
             throw new IllegalArgumentException("The date must not be null");
@@ -250,6 +254,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if either date is <code>null</code>
      * @since 2.1
      */
+    //@ requires cal1 != null && cal2 != null;
+    //@ signals_only IllegalArgumentException;
     public static boolean isSameLocalTime(final Calendar cal1, final Calendar cal2) {
         if (cal1 == null || cal2 == null) {
             throw new IllegalArgumentException("The date must not be null");
@@ -279,6 +285,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date string or pattern array is null
      * @throws ParseException if none of the date patterns were suitable (or there were none)
      */
+    //@ requires str != null && parsePatterns != null;
+    //@ signals (IllegalArgumentException);
+    //@ signals (ParseException);
     public static Date parseDate(final String str, final String... parsePatterns) throws ParseException {
         return parseDate(str, null, parsePatterns);
     }
@@ -302,6 +311,9 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable (or there were none)
      * @since 3.2
      */
+    //@ requires str != null && parsePatterns != null;
+    //@ signals (IllegalArgumentException);
+    //@ signals (ParseException);
     public static Date parseDate(final String str, final Locale locale, final String... parsePatterns) throws ParseException {
         return parseDateWithLeniency(str, locale, parsePatterns, true);
     }
@@ -322,6 +334,10 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable
      * @since 2.5
      */
+    
+    //@ requires str != null && parsePatterns != null;
+    //@ signals (IllegalArgumentException);
+    //@ signals (ParseException);
     public static Date parseDateStrictly(final String str, final String... parsePatterns) throws ParseException {
         return parseDateStrictly(str, null, parsePatterns);
     }
@@ -344,6 +360,9 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable
      * @since 3.2
      */
+    //@ requires str != null && parsePatterns != null;
+    //@ signals (IllegalArgumentException);
+    //@ signals (ParseException);
     public static Date parseDateStrictly(final String str, final Locale locale, final String... parsePatterns) throws ParseException {
         return parseDateWithLeniency(str, locale, parsePatterns, false);
     }
@@ -365,6 +384,9 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable
      * @see java.util.Calendar#isLenient()
      */
+    //@ requires str != null && parsePatterns != null;
+    //@ signals (IllegalArgumentException);
+    //@ signals (ParseException);
     private static Date parseDateWithLeniency(
             final String str, final Locale locale, final String[] parsePatterns, final boolean lenient) throws ParseException {
         if (str == null || parsePatterns == null) {
@@ -402,6 +424,9 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ ensures \result.getYear() == \old(date).getYear() + amount;
+    //@ signals_only IllegalArgumentException;
     public static Date addYears(final Date date, final int amount) {
         return add(date, Calendar.YEAR, amount);
     }
@@ -416,6 +441,9 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ ensures \result.getMonth() == \old(date).getMonth() + amount;
+    //@ signals_only IllegalArgumentException;
     public static Date addMonths(final Date date, final int amount) {
         return add(date, Calendar.MONTH, amount);
     }
@@ -430,6 +458,8 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static Date addWeeks(final Date date, final int amount) {
         return add(date, Calendar.WEEK_OF_YEAR, amount);
     }
@@ -444,6 +474,8 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static Date addDays(final Date date, final int amount) {
         return add(date, Calendar.DAY_OF_MONTH, amount);
     }
@@ -458,6 +490,9 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ ensures \result.getHours() == \old(date).getHours() + amount;
+    //@ signals_only IllegalArgumentException;
     public static Date addHours(final Date date, final int amount) {
         return add(date, Calendar.HOUR_OF_DAY, amount);
     }
@@ -472,6 +507,9 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ ensures \result.getMinutes() == \old(date).getMinutes() + amount;
+    //@ signals_only IllegalArgumentException;
     public static Date addMinutes(final Date date, final int amount) {
         return add(date, Calendar.MINUTE, amount);
     }
@@ -486,6 +524,9 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ ensures \result.getSeconds() == \old(date).getSeconds() + amount;
+    //@ signals_only IllegalArgumentException;
     public static Date addSeconds(final Date date, final int amount) {
         return add(date, Calendar.SECOND, amount);
     }
@@ -500,6 +541,8 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static Date addMilliseconds(final Date date, final int amount) {
         return add(date, Calendar.MILLISECOND, amount);
     }
@@ -515,6 +558,8 @@ public class DateUtils {
      * @return the new {@code Date} with the amount added
      * @throws IllegalArgumentException if the date is null
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     private static Date add(final Date date, final int calendarField, final int amount) {
         validateDateNotNull(date);
         final Calendar c = Calendar.getInstance();
@@ -534,6 +579,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ ensures \result.getYear() == amount;
+    //@ signals_only IllegalArgumentException;
     public static Date setYears(final Date date, final int amount) {
         return set(date, Calendar.YEAR, amount);
     }
@@ -549,6 +597,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ ensures \result.getMonth() == amount;
+    //@ signals_only IllegalArgumentException;
     public static Date setMonths(final Date date, final int amount) {
         return set(date, Calendar.MONTH, amount);
     }
@@ -564,6 +615,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static Date setDays(final Date date, final int amount) {
         return set(date, Calendar.DAY_OF_MONTH, amount);
     }
@@ -580,6 +633,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ ensures \result.getHours() == amount;
+    //@ signals_only IllegalArgumentException;
     public static Date setHours(final Date date, final int amount) {
         return set(date, Calendar.HOUR_OF_DAY, amount);
     }
@@ -595,6 +651,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ ensures \result.getMinutes() == amount;
+    //@ signals_only IllegalArgumentException;
     public static Date setMinutes(final Date date, final int amount) {
         return set(date, Calendar.MINUTE, amount);
     }
@@ -610,6 +669,9 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ ensures \result.getSeconds() == amount;
+    //@ signals_only IllegalArgumentException;
     public static Date setSeconds(final Date date, final int amount) {
         return set(date, Calendar.SECOND, amount);
     }
@@ -625,6 +687,8 @@ public class DateUtils {
      * @throws IllegalArgumentException if the date is null
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static Date setMilliseconds(final Date date, final int amount) {
         return set(date, Calendar.MILLISECOND, amount);
     }
@@ -661,6 +725,9 @@ public class DateUtils {
      * @throws NullPointerException if null is passed in
      * @since 3.0
      */
+    //@ ensures \typeof(\result) == \type(Calendar);
+    //@ ensures \result.getTime().getTime() == date.getTime();
+    //@ signals_only NullPointerException;
     public static Calendar toCalendar(final Date date) {
         final Calendar c = Calendar.getInstance();
         c.setTime(date);
@@ -675,6 +742,9 @@ public class DateUtils {
      * @return the created Calendar
      * @throws NullPointerException if {@code date} or {@code tz} is null
      */
+    //@ ensures \typeof(\result) == \type(Calendar);
+    //@ ensures \result.getTime().getTime() == date.getTime();
+    //@ signals_only NullPointerException;
     public static Calendar toCalendar(final Date date, final TimeZone tz) {
         final Calendar c = Calendar.getInstance(tz);
         c.setTime(date);
@@ -1289,6 +1359,8 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     public static long getFragmentInMilliseconds(final Date date, final int fragment) {
         return getFragment(date, fragment, TimeUnit.MILLISECONDS);
     }
@@ -1327,6 +1399,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) date.getSeconds();
     public static long getFragmentInSeconds(final Date date, final int fragment) {
         return getFragment(date, fragment, TimeUnit.SECONDS);
     }
@@ -1365,6 +1440,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) date.getMinutes();
     public static long getFragmentInMinutes(final Date date, final int fragment) {
         return getFragment(date, fragment, TimeUnit.MINUTES);
     }
@@ -1403,6 +1481,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) date.getHours();
     public static long getFragmentInHours(final Date date, final int fragment) {
         return getFragment(date, fragment, TimeUnit.HOURS);
     }
@@ -1441,6 +1522,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) date.getDay();
     public static long getFragmentInDays(final Date date, final int fragment) {
         return getFragment(date, fragment, TimeUnit.DAYS);
     }
@@ -1479,6 +1563,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires calendar != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) calendar.get(Calendar.MILLISECOND);
   public static long getFragmentInMilliseconds(final Calendar calendar, final int fragment) {
     return getFragment(calendar, fragment, TimeUnit.MILLISECONDS);
   }
@@ -1516,6 +1603,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+  //@ requires calendar != null;
+  //@ signals_only IllegalArgumentException;
+  //@ ensures \result == (long) calendar.get(Calendar.SECOND);
     public static long getFragmentInSeconds(final Calendar calendar, final int fragment) {
         return getFragment(calendar, fragment, TimeUnit.SECONDS);
     }
@@ -1554,6 +1644,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires calendar != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) calendar.get(Calendar.MINUTES);
     public static long getFragmentInMinutes(final Calendar calendar, final int fragment) {
         return getFragment(calendar, fragment, TimeUnit.MINUTES);
     }
@@ -1592,6 +1685,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires calendar != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) calendar.get(Calendar.HOUR_OF_DAY);
     public static long getFragmentInHours(final Calendar calendar, final int fragment) {
         return getFragment(calendar, fragment, TimeUnit.HOURS);
     }
@@ -1632,6 +1728,9 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires calendar != null;
+    //@ signals_only IllegalArgumentException;
+    //@ ensures \result == (long) calendar.get(Calendar.DAY_OF_YEAR);
     public static long getFragmentInDays(final Calendar calendar, final int fragment) {
         return getFragment(calendar, fragment, TimeUnit.DAYS);
     }
@@ -1647,6 +1746,8 @@ public class DateUtils {
      * fragment is not supported
      * @since 2.4
      */
+    //@ requires date != null;
+    //@ signals_only IllegalArgumentException;
     private static long getFragment(final Date date, final int fragment, final TimeUnit unit) {
         validateDateNotNull(date);
         final Calendar calendar = Calendar.getInstance();
