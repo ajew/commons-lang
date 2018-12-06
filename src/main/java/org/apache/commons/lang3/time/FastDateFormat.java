@@ -107,7 +107,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
     };
 
     private /*@ spec_public @*/ final FastDatePrinter printer;
-    private final FastDateParser parser;
+    private /*@ spec_public @*/ final FastDateParser parser;
 
     //-----------------------------------------------------------------------
     /**
@@ -116,7 +116,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return a date/time formatter
      */
-    //@ requires \typeof(\result) == \type(FastDateFormat);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
     public static FastDateFormat getInstance() {
         return cache.getInstance();
     }
@@ -203,7 +203,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *  pattern defined
      * @since 2.1
      */
-    //@ requires \typeof(pattern) == \type(String) && \typeof(locale) == \type(Locale);
+    //@ requires \typeof(style) == \type(int);
     //@ ensures \typeof(\result) == \type(FastDateFormat);
     //@ signals_only IllegalArgumentException;
     public static FastDateFormat getDateInstance(final int style) {
@@ -439,7 +439,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @return the formatted string
      * @since 2.1
      */
-    //@ also requires millis != null;
+    //nao funciona //@ also requires millis != null;
     //@ also ensures \result == printer.format(millis);
     @Override
     public String format(final long millis) {
