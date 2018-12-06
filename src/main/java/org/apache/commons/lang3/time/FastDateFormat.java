@@ -106,7 +106,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
         }
     };
 
-    private final FastDatePrinter printer;
+    private /*@ spec_public @*/ final FastDatePrinter printer;
     private final FastDateParser parser;
 
     //-----------------------------------------------------------------------
@@ -116,6 +116,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return a date/time formatter
      */
+    //@ requires \typeof(\result) == \type(FastDateFormat);
     public static FastDateFormat getInstance() {
         return cache.getInstance();
     }
@@ -129,6 +130,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @return a pattern based date/time formatter
      * @throws IllegalArgumentException if pattern is invalid
      */
+    //@ requires \typeof(pattern) == \type(String);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
+    //@ signals_only IllegalArgumentException;
     public static FastDateFormat getInstance(final String pattern) {
         return cache.getInstance(pattern, null, null);
     }
@@ -144,6 +148,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @return a pattern based date/time formatter
      * @throws IllegalArgumentException if pattern is invalid
      */
+    //@ requires \typeof(pattern) == \type(String) && \typeof(timeZone) == \type(TimeZone);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
+    //@ signals_only IllegalArgumentException;
     public static FastDateFormat getInstance(final String pattern, final TimeZone timeZone) {
         return cache.getInstance(pattern, timeZone, null);
     }
@@ -158,6 +165,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @return a pattern based date/time formatter
      * @throws IllegalArgumentException if pattern is invalid
      */
+    //@ requires \typeof(pattern) == \type(String) && \typeof(locale) == \type(Locale);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
+    //@ signals_only IllegalArgumentException;
     public static FastDateFormat getInstance(final String pattern, final Locale locale) {
         return cache.getInstance(pattern, null, locale);
     }
@@ -175,6 +185,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @throws IllegalArgumentException if pattern is invalid
      *  or {@code null}
      */
+    //@ requires \typeof(pattern) == \type(String) && \typeof(timeZone) == \type(TimeZone) && \typeof(locale) == \type(Locale);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
+    //@ signals_only IllegalArgumentException;
     public static FastDateFormat getInstance(final String pattern, final TimeZone timeZone, final Locale locale) {
         return cache.getInstance(pattern, timeZone, locale);
     }
@@ -190,6 +203,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *  pattern defined
      * @since 2.1
      */
+    //@ requires \typeof(pattern) == \type(String) && \typeof(locale) == \type(Locale);
+    //@ ensures \typeof(\result) == \type(FastDateFormat);
+    //@ signals_only IllegalArgumentException;
     public static FastDateFormat getDateInstance(final int style) {
         return cache.getDateInstance(style, null, null);
     }
@@ -423,6 +439,8 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @return the formatted string
      * @since 2.1
      */
+    //@ also requires millis != null;
+    //@ also ensures \result == printer.format(millis);
     @Override
     public String format(final long millis) {
         return printer.format(millis);
@@ -434,6 +452,8 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @param date  the date to format
      * @return the formatted string
      */
+    //@ also requires date != null;
+    //@ also ensures \result == printer.format(date);
     @Override
     public String format(final Date date) {
         return printer.format(date);
@@ -445,6 +465,8 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @param calendar  the calendar to format
      * @return the formatted string
      */
+    //@ also requires calendar != null;
+    //@ also ensures \result == printer.format(calendar);
     @Override
     public String format(final Calendar calendar) {
         return printer.format(calendar);
@@ -582,6 +604,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return the pattern, {@link java.text.SimpleDateFormat} compatible
      */
+    //@ also ensures \result == printer.getPattern();
     @Override
     public String getPattern() {
         return printer.getPattern();
@@ -594,6 +617,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return the time zone
      */
+    //@ also ensures \result == printer.getTimeZone();
     @Override
     public TimeZone getTimeZone() {
         return printer.getTimeZone();
@@ -604,6 +628,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return the locale
      */
+    //@ also ensures \result == printer.getLocale();
     @Override
     public Locale getLocale() {
         return printer.getLocale();
@@ -618,6 +643,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return the maximum formatted length
      */
+    //@ ensures \result == printer.getMaxLengthEstimate();
     public int getMaxLengthEstimate() {
         return printer.getMaxLengthEstimate();
     }
@@ -645,6 +671,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return a hash code compatible with equals
      */
+    //@ also ensures \typeof(\result) == \type(int);
     @Override
     public int hashCode() {
         return printer.hashCode();
@@ -655,6 +682,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      *
      * @return a debugging string
      */
+    //@ also ensures \typeof(\result) == \type(String);
     @Override
     public String toString() {
         return "FastDateFormat[" + printer.getPattern() + "," + printer.getLocale() + "," + printer.getTimeZone().getID() + "]";
