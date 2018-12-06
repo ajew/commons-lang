@@ -208,7 +208,7 @@ public class StringUtils {
      * @param cs  the CharSequence to check, may be null
      * @return {@code true} if the CharSequence is empty or null
      * @since 3.0 Changed signature from isEmpty(String) to isEmpty(CharSequence)
-     */
+     */ 
     public static boolean isEmpty(final CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
@@ -493,6 +493,7 @@ public class StringUtils {
      * @param str  the String to be trimmed, may be null
      * @return the trimmed string, {@code null} if null String input
      */
+    //@ ensures \result == null || \result.matches("^\\S*$");
     public static String trim(final String str) {
         return str == null ? null : str.trim();
     }
