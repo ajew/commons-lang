@@ -337,6 +337,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(long[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static long[] clone(final long[] array) {
         if (array == null) {
             return null;
@@ -353,6 +355,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(int[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static int[] clone(final int[] array) {
         if (array == null) {
             return null;
@@ -369,6 +373,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(short[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static short[] clone(final short[] array) {
         if (array == null) {
             return null;
@@ -385,6 +391,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(char[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static char[] clone(final char[] array) {
         if (array == null) {
             return null;
@@ -401,6 +409,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(byte[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static byte[] clone(final byte[] array) {
         if (array == null) {
             return null;
@@ -417,6 +427,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(double[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static double[] clone(final double[] array) {
         if (array == null) {
             return null;
@@ -433,6 +445,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(float[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static float[] clone(final float[] array) {
         if (array == null) {
             return null;
@@ -449,6 +463,8 @@ public class ArrayUtils {
      * @param array  the array to clone, may be {@code null}
      * @return the cloned array, {@code null} if {@code null} input
      */
+    //@ ensures \typeof(\result) == \type(boolean[]);
+    //@ ensures \result == null || \result.length == array.length;
     public static boolean[] clone(final boolean[] array) {
         if (array == null) {
             return null;
@@ -471,6 +487,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the type argument is null
      * @since 3.5
      */
+    
     public static <T> T[] nullToEmpty(final T[] array, final Class<T[]> type) {
         if (type == null) {
             throw new IllegalArgumentException("The type must not be null");
@@ -496,6 +513,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Object[]);
+    //@ ensures \result == array || \result == EMPTY_OBJECT_ARRAY;
     public static Object[] nullToEmpty(final Object[] array) {
         if (isEmpty(array)) {
             return EMPTY_OBJECT_ARRAY;
@@ -516,6 +535,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 3.2
      */
+    //@ ensures \typeof(\result) == \type(Class<?>[]);
+    //@ ensures \result == array || \result == EMPTY_CLASS_ARRAY;
     public static Class<?>[] nullToEmpty(final Class<?>[] array) {
         if (isEmpty(array)) {
             return EMPTY_CLASS_ARRAY;
@@ -536,6 +557,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(String[]);
+    //@ ensures \result == array || \result == EMPTY_STRING_ARRAY;
     public static String[] nullToEmpty(final String[] array) {
         if (isEmpty(array)) {
             return EMPTY_STRING_ARRAY;
@@ -556,6 +579,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(long[]);
+    //@ ensures \result == array || \result == EMPTY_LONG_ARRAY;
     public static long[] nullToEmpty(final long[] array) {
         if (isEmpty(array)) {
             return EMPTY_LONG_ARRAY;
@@ -576,6 +601,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(int[]);
+    //@ ensures \result == array || \result == EMPTY_INT_ARRAY;
     public static int[] nullToEmpty(final int[] array) {
         if (isEmpty(array)) {
             return EMPTY_INT_ARRAY;
@@ -596,6 +623,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(short[]);
+    //@ ensures \result == array || \result == EMPTY_SHORT_ARRAY;
     public static short[] nullToEmpty(final short[] array) {
         if (isEmpty(array)) {
             return EMPTY_SHORT_ARRAY;
@@ -616,6 +645,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(char[]);
+    //@ ensures \result == array || \result == EMPTY_CHAR_ARRAY;
     public static char[] nullToEmpty(final char[] array) {
         if (isEmpty(array)) {
             return EMPTY_CHAR_ARRAY;
@@ -636,6 +667,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(byte[]);
+    //@ ensures \result == array || \result == EMPTY_BYTE_ARRAY;
     public static byte[] nullToEmpty(final byte[] array) {
         if (isEmpty(array)) {
             return EMPTY_BYTE_ARRAY;
@@ -656,6 +689,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(double[]);
+    //@ ensures \result == array || \result == EMPTY_DOUBLE_ARRAY;
     public static double[] nullToEmpty(final double[] array) {
         if (isEmpty(array)) {
             return EMPTY_DOUBLE_ARRAY;
@@ -676,6 +711,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(float[]);
+    //@ ensures \result == array || \result == EMPTY_FLOAT_ARRAY;
     public static float[] nullToEmpty(final float[] array) {
         if (isEmpty(array)) {
             return EMPTY_FLOAT_ARRAY;
@@ -696,6 +733,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(boolean[]);
+    //@ ensures \result == array || \result == EMPTY_BOOLEAN_ARRAY;
     public static boolean[] nullToEmpty(final boolean[] array) {
         if (isEmpty(array)) {
             return EMPTY_BOOLEAN_ARRAY;
@@ -716,6 +755,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Long[]);
+    //@ ensures \result == array || \result == EMPTY_LONG_OBJECT_ARRAY;
     public static Long[] nullToEmpty(final Long[] array) {
         if (isEmpty(array)) {
             return EMPTY_LONG_OBJECT_ARRAY;
@@ -736,6 +777,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Integer[]);
+    //@ ensures \result == array || \result == EMPTY_INTEGER_OBJECT_ARRAY;
     public static Integer[] nullToEmpty(final Integer[] array) {
         if (isEmpty(array)) {
             return EMPTY_INTEGER_OBJECT_ARRAY;
@@ -756,6 +799,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Short[]);
+    //@ ensures \result == array || \result == EMPTY_SHORT_OBJECT_ARRAY;
     public static Short[] nullToEmpty(final Short[] array) {
         if (isEmpty(array)) {
             return EMPTY_SHORT_OBJECT_ARRAY;
@@ -776,6 +821,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Character[]);
+    //@ ensures \result == array || \result == EMPTY_CHARACTER_OBJECT_ARRAY;
     public static Character[] nullToEmpty(final Character[] array) {
         if (isEmpty(array)) {
             return EMPTY_CHARACTER_OBJECT_ARRAY;
@@ -796,6 +843,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Byte[]);
+    //@ ensures \result == array || \result == EMPTY_BYTE_OBJECT_ARRAY;
     public static Byte[] nullToEmpty(final Byte[] array) {
         if (isEmpty(array)) {
             return EMPTY_BYTE_OBJECT_ARRAY;
@@ -816,6 +865,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Double[]);
+    //@ ensures \result == array || \result == EMPTY_DOUBLE_OBJECT_ARRAY;
     public static Double[] nullToEmpty(final Double[] array) {
         if (isEmpty(array)) {
             return EMPTY_DOUBLE_OBJECT_ARRAY;
@@ -836,6 +887,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Float[]);
+    //@ ensures \result == array || \result == EMPTY_FLOAT_OBJECT_ARRAY;
     public static Float[] nullToEmpty(final Float[] array) {
         if (isEmpty(array)) {
             return EMPTY_FLOAT_OBJECT_ARRAY;
@@ -856,6 +909,8 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input
      * @since 2.5
      */
+    //@ ensures \typeof(\result) == \type(Boolean[]);
+    //@ ensures \result == array || \result == EMPTY_BOOLEAN_OBJECT_ARRAY;
     public static Boolean[] nullToEmpty(final Boolean[] array) {
         if (isEmpty(array)) {
             return EMPTY_BOOLEAN_OBJECT_ARRAY;
@@ -894,6 +949,7 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(Object[], int, int)
      */
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static <T> T[] subarray(final T[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -938,6 +994,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(long[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(long[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static long[] subarray(final long[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -978,6 +1036,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(int[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(int[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static int[] subarray(final int[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1018,6 +1078,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(short[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(short[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static short[] subarray(final short[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1058,6 +1120,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(char[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(char[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static char[] subarray(final char[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1098,6 +1162,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(byte[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(byte[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static byte[] subarray(final byte[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1138,6 +1204,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(double[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(double[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static double[] subarray(final double[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1178,6 +1246,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(float[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(float[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static float[] subarray(final float[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1218,6 +1288,8 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(boolean[], int, int)
      */
+    //@ ensures \typeof(\result) == \type(boolean[]);
+    //@ ensures \result.length == endIndexExclusive - startIndexInclusive;
     public static boolean[] subarray(final boolean[] array, int startIndexInclusive, int endIndexExclusive) {
         if (array == null) {
             return null;
@@ -1251,6 +1323,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating
      *  {@code null} as an empty array
      */
+    
     public static boolean isSameLength(final Object[] array1, final Object[] array2) {
         return getLength(array1) == getLength(array2);
     }
@@ -1380,6 +1453,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the object argument is not an array.
      * @since 2.1
      */
+    //@ ensures \result == 0 || \result == array.length;
     public static int getLength(final Object array) {
         if (array == null) {
             return 0;
